@@ -133,3 +133,5 @@ try:
 
 finally:
     pygame.quit()
+    print("END.")
+    image.save('a.png', 'PNG')
