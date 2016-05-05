@@ -36,6 +36,15 @@ def pointInTriangle(pt, v1, v2, v3):
     return ((b1 == b2) and (b2 == b3)) and pointInAABB(pt, tuple(map(max, v1, v2, v3)), tuple(map(min, v1, v2, v3)))
 #Fine codice copiato spudoratamente da StackOverflow
 
+def trianglesCollision(t1, t2):
+    for i in range(3):
+        z = pointInTriangle(t1[i], t2[0], t2[1], t2[2])
+        if z: return True
+    for i in range(3):
+        z = pointInTriangle(t2[i], t1[0], t1[1], t1[2])
+        if z: return True
+    return False
+
 def circlepos(angle, radius, pos):
     x = math.cos(angle) * radius + pos[0]
     y = math.sin(angle) * radius + pos[1]
