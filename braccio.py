@@ -14,6 +14,16 @@ class Braccio():
         self.w = 20
         self.center = (400, 400)
         self.t = []
+
+    def update(self):
+        self.b += 0.02
+        if self.b > math.pi * 2:
+            self.b = 0
+            self.a += 0.02
+        self.t = []
+        self.t.append(rectVertex(self.center, self.la, self.w, self.w, self.w, self.a))
+        self.t.append(rectVertex(circlepos(self.a, self.la - self.w, self.center), self.lb, self.w, self.w, self.w, self.b))
+
     def draw(self):
         pass
 
