@@ -3,17 +3,17 @@ import math
 import random
 from PIL import Image
 
-width = 800
-height = 800
+width = 1000
+height = 1000
 
 class Braccio():
     def __init__(self):
         self.a = 0.0
         self.b = 0.0
         self.la = 200
-        self.lb = 200
-        self.w = 20
-        self.center = (400, 400)
+        self.lb = 150
+        self.w = 10
+        self.center = (500, 500)
         self.t = []
 
     def update(self):
@@ -22,13 +22,13 @@ class Braccio():
             self.b = 0
             self.a += 0.02
         self.t = []
-        self.t.append(rectVertex(self.center, self.la, self.w, self.w, self.w, self.a))
-        self.t.append(rectVertex(circlepos(self.a, self.la - self.w, self.center), self.lb, self.w, self.w, self.w, self.b))
+        self.t.append(rectVertex(self.center, self.la, self.w, 0, self.w, self.a))
+        self.t.append(rectVertex(circlepos(self.a, self.la, self.center), self.lb, self.w, 0, self.w, self.b))
 
     def draw(self):
         pygame.draw.polygon(screen, (0, 0, 0), self.t[0])
         pygame.draw.circle(screen, (255, 0, 0), self.center, 3)
-        c = circlepos(self.a, self.la - self.w, self.center)
+        c = circlepos(self.a, self.la, self.center)
         pygame.draw.polygon(screen, (0, 0, 0), self.t[1])
         pygame.draw.circle(screen, (255, 0, 0), (int(c[0]), int(c[1])), 3)
 
@@ -94,13 +94,16 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption('BraccioThatCollide')
 clock = pygame.time.Clock()
 
-obList = [((300, 330), (120, 230), (320, 190)), ((550, 550), (600, 600), (550, 600))]
+obList = [((0, 800), (1000, 800), (0, 1000)),
+          ((1000, 800), (1000, 1000), (0, 1000)),
+          ((550, 300), (550, 350), (500, 325)),
+          ((200, 500), (200, 550), (150, 525))]
 braccio = Braccio()
 image = Image.new('RGB', (314, 314))
 x = 0
 y = 0
 col = False
-render = False
+render = True
 
 done = False
 try:
