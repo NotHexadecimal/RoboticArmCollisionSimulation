@@ -93,10 +93,8 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption('BraccioThatCollide')
 clock = pygame.time.Clock()
 
-triangle = [[50, 75], [100, 25], [110, 100]]
-a = False
-b = 0
-d = 0
+obList = [((300, 330), (120, 230), (320, 190)), ((550, 550), (600, 600), (550, 600))]
+braccio = Braccio()
 
 done = False
 try:
@@ -106,20 +104,10 @@ try:
                 done = True
         screen.fill((255, 255, 255))
 
-        pygame.draw.polygon(screen, (255, 0, 0) if a else (0, 0, 0), triangle)
-
-        a = pointInTriangle(pygame.mouse.get_pos(), triangle[0], triangle[1], triangle[2])
-
-        pygame.draw.polygon(screen, (0, 0, 0), rectVertex((500, 500), 100, 20, 20, 20, b))
-        pygame.draw.circle(screen, (255, 0, 0), (500, 500), 3)
-        c = circlepos(b, 80, (500, 500))
-        pygame.draw.polygon(screen, (0, 0, 0), rectVertex(c, 100, 20, 20, 20, d))
-        pygame.draw.circle(screen, (255, 0, 0), (int(c[0]), int(c[1])), 3)
-
-        d += 0.1
-        if d > math.pi * 2:
-            d %= math.pi * 2
-            b += 0.1
+        braccio.update()
+        braccio.draw()
+        for i in obList:
+            pygame.draw.polygon(screen, (0, 0, 0), i)
 
         pygame.display.update()
         clock.tick(30)
