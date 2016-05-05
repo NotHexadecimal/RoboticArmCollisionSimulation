@@ -95,6 +95,7 @@ clock = pygame.time.Clock()
 
 obList = [((300, 330), (120, 230), (320, 190)), ((550, 550), (600, 600), (550, 600))]
 braccio = Braccio()
+col = False
 
 done = False
 try:
@@ -102,9 +103,13 @@ try:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
-        screen.fill((255, 255, 255))
+
+        screen.fill((255, 0, 0) if col else (255, 255, 255))
 
         braccio.update()
+
+        col = braccio.collisionChecker(obList)
+
         braccio.draw()
         for i in obList:
             pygame.draw.polygon(screen, (0, 0, 0), i)
