@@ -7,13 +7,31 @@ height = 800
 
 class Braccio():
     def __init__(self):
-        a = 0
-        b = 0
-        la = 200
-        lb = 200
-        w = 20
+        self.a = 0.0
+        self.b = 0.0
+        self.la = 200
+        self.lb = 200
+        self.w = 20
+        self.center = (400, 400)
+        self.t = []
     def draw(self):
         pass
+
+    def collisionChecker(self, obstacleList):
+          for i in obstacleList:
+              if trianglesCollision(i, (self.t[0][0], self.t[0][1], self.t[0][2])):
+                  return True
+          for i in obstacleList:
+              if trianglesCollision(i, (self.t[0][0], self.t[0][3], self.t[0][2])):
+                  return True
+          for i in obstacleList:
+              if trianglesCollision(i, (self.t[1][0], self.t[1][1], self.t[1][2])):
+                  return True
+          for i in obstacleList:
+              if trianglesCollision(i, (self.t[1][0], self.t[1][3], self.t[1][2])):
+                  return True
+          return False
+
     def __str__(self):
         return 'Perchè cazzo stai cercando di convertire un braccio in una stringa?!?'
 
