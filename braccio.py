@@ -1,6 +1,7 @@
 import pygame
 import math
 import random
+from PIL import Image
 
 width = 800
 height = 800
@@ -95,6 +96,9 @@ clock = pygame.time.Clock()
 
 obList = [((300, 330), (120, 230), (320, 190)), ((550, 550), (600, 600), (550, 600))]
 braccio = Braccio()
+image = Image.new('RGB', (314, 314))
+x = 0
+y = 0
 col = False
 render = False
 
@@ -111,6 +115,13 @@ try:
         braccio.update()
 
         col = braccio.collisionChecker(obList)
+        image.putpixel((x, y), (255, 0, 0) if col else (0, 255, 0))
+        x += 1
+        if x == 314:
+            if y == 313:
+                done = True
+            x = 0
+            y += 1
 
         if render:
             braccio.draw()
