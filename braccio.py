@@ -25,7 +25,11 @@ class Braccio():
         self.t.append(rectVertex(circlepos(self.a, self.la - self.w, self.center), self.lb, self.w, self.w, self.w, self.b))
 
     def draw(self):
-        pass
+        pygame.draw.polygon(screen, (0, 0, 0), self.t[0])
+        pygame.draw.circle(screen, (255, 0, 0), self.center, 3)
+        c = circlepos(self.a, self.la - self.w, self.center)
+        pygame.draw.polygon(screen, (0, 0, 0), self.t[1])
+        pygame.draw.circle(screen, (255, 0, 0), (int(c[0]), int(c[1])), 3)
 
     def collisionChecker(self, obstacleList):
           for i in obstacleList:
